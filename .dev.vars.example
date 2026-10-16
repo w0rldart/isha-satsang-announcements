@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local development; it is not committed. Without the two links, npm run dev uses fixtures/.
+CHECK_KEY=local-check-key
+ANNOUNCEMENTS_CSV_URL=
+LOCATIONS_CSV_URL=

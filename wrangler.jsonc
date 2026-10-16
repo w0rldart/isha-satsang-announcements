@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "satsang-announcements",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2026-10-01",
+
+  // The app's own error messages are kept for 3 days. Per-request logs are off, so nothing about visitors is stored.
+  "observability": { "enabled": true, "logs": { "invocation_logs": false } },
+
+  // Reads the sheet every 5 minutes and stores it in KV. Attendee pages read the stored copy.
+  "triggers": { "crons": ["*/5 * * * *"] },
+
+  // Production needs your own domain (its DNS on Cloudflare): banner caching only works there. Uncomment and edit:
+  // "routes": [{ "pattern": "satsang.example.org", "custom_domain": true }],
+
+  // The first deploy creates this namespace and writes its id here. Commit that change.
+  "kv_namespaces": [{ "binding": "SNAPSHOTS" }],
+}

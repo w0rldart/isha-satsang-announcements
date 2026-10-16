@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [".react-router/types/**/*", "app/**/*", "workers/**/*", "worker-configuration.d.ts", "fixtures/**/*"],
+  "compilerOptions": {
+    "composite": true,
+    "lib": ["ES2023"],
+    "types": ["vite/client"],
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "rootDirs": [".", "./.react-router/types"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  }
+}

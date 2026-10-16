@@ -1,0 +1,11 @@
+# Monthly, grouped dependency updates once this repository is on GitHub. One pull request a month at most.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      all:
+        patterns: ["*"]
+    open-pull-requests-limit: 1
