@@ -1,0 +1,683 @@
+:root {
+  --bg: #f2f2ee;
+  --surface: #ffffff;
+  --ink: #23201d;
+  --ink-soft: #5d5853;
+  --line: #e1dfd9;
+  --line-strong: #c9c5bd;
+  --saffron: #ad461b;
+  --sand: #f0e8dc;
+  --sand-ink: #574430;
+  --dusk: #e3eaf1;
+  --dusk-ink: #2a4560;
+  --focus: #1f5d93;
+  --error-bg: #f7e1dc;
+  --error-ink: #872818;
+  --warning-bg: #f5ead0;
+  --warning-ink: #5e4407;
+
+  --serif: "Literata", Georgia, "Noto Serif", serif;
+  --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", "Noto Sans", sans-serif;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151311;
+    --surface: #1f1c19;
+    --ink: #ede8e1;
+    --ink-soft: #aaa299;
+    --line: #322d29;
+    --line-strong: #4a443e;
+    --saffron: #ee9a66;
+    --sand: #3a3027;
+    --sand-ink: #eddcc6;
+    --dusk: #25313c;
+    --dusk-ink: #cfdeec;
+    --focus: #8cc4f0;
+    --error-bg: #3d211b;
+    --error-ink: #ffc2b6;
+    --warning-bg: #3a3019;
+    --warning-ink: #f2dca6;
+  }
+}
+
+/* Base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+p,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.icon {
+  flex: none;
+}
+
+/* Page frame */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 74rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.page > main {
+  flex: 1;
+}
+
+.masthead {
+  padding: 1.25rem 0;
+}
+
+.masthead-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 2.75rem;
+  text-decoration: none;
+}
+
+.mark {
+  color: var(--saffron);
+}
+
+.masthead-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9375rem;
+  line-height: 1.25;
+}
+
+.masthead-org {
+  font-weight: 600;
+}
+
+.masthead-name {
+  color: var(--ink-soft);
+}
+
+.footer {
+  margin-top: clamp(3rem, 8vw, 5rem);
+  padding: 1.5rem 0 2.5rem;
+  border-top: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+/* Location picker */
+
+.intro {
+  max-width: 36rem;
+  padding: clamp(1.75rem, 7vw, 4.5rem) 0 clamp(1.75rem, 4vw, 2.75rem);
+}
+
+.intro-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.125rem, 1.45rem + 3vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.intro-text {
+  margin-top: 0.875rem;
+  color: var(--ink-soft);
+  font-size: 1.125rem;
+}
+
+.countries {
+  columns: 1;
+}
+
+@media (min-width: 46rem) {
+  .countries {
+    columns: 2;
+    column-gap: clamp(2rem, 5vw, 4rem);
+  }
+}
+
+@media (min-width: 70rem) {
+  .countries {
+    columns: 3;
+  }
+}
+
+.country {
+  break-inside: avoid;
+  padding-bottom: 2rem;
+}
+
+.country-name {
+  padding-bottom: 0.25rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.place-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.place-link .icon {
+  color: var(--ink-soft);
+}
+
+.place-link:hover,
+.place-link:active {
+  color: var(--saffron);
+}
+
+.place-link:hover .icon,
+.place-link:active .icon {
+  color: currentColor;
+}
+
+/* Location page */
+
+.place-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  padding: clamp(1.25rem, 6vw, 4rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.place-name {
+  flex: 1 1 100%;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2.75rem, 1.5rem + 5.5vw, 5.25rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.place-meta {
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
+}
+
+.change-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.125rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+
+.change-link:hover {
+  border-color: var(--ink-soft);
+}
+
+/* Program tiles */
+
+.tiles {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+}
+
+@media (min-width: 40rem) {
+  .tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  container-type: inline-size;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: 0 14px 32px -24px rgb(35 32 29 / 0.35);
+  overflow: hidden;
+}
+
+.tile-linked:hover {
+  border-color: var(--line-strong);
+}
+
+/* 4:3, as the sheet template asks, so a correctly sized banner is never cropped. */
+.tile-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background: var(--sand);
+}
+
+.tile-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.875rem;
+  min-width: 0;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.tile-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+.tile-link {
+  text-decoration: none;
+}
+
+/* The title link covers the whole tile, so the tile is one tap target. */
+.tile-link::after {
+  content: "";
+  position: absolute;
+  /* Not "inset: 0": iPhones before iOS 14.5 ignore it, and only the title would be tappable. */
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+@supports selector(:has(a)) {
+  .tile-link:focus-visible {
+    outline: none;
+  }
+
+  .tile:has(.tile-link:focus-visible) {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+  }
+}
+
+.badge {
+  align-self: flex-start;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.badge-in-person {
+  background: var(--sand);
+  color: var(--sand-ink);
+}
+
+.badge-online {
+  background: var(--dusk);
+  color: var(--dusk-ink);
+}
+
+/* The image spans the tile at 4:3, so its bottom edge is at 75% of the tile's width. Older browsers show the
+   badge under the title instead. */
+@supports (top: 1cqi) {
+  .tile .badge {
+    position: absolute;
+    top: calc(75cqi - 2.75rem);
+    left: 1rem;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 0.2);
+  }
+}
+
+.facts {
+  display: grid;
+  gap: 0.5rem;
+  color: var(--ink-soft);
+}
+
+.fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.fact .icon {
+  margin-top: 0.2rem;
+}
+
+.fact-date {
+  color: var(--saffron);
+  font-weight: 600;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.chip {
+  padding: 0 0.625rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.tile-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding: 0.875rem 0 1rem;
+  border-top: 1px solid var(--line);
+  color: var(--saffron);
+  font-weight: 600;
+}
+
+.tile-linked:hover .tile-action {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.tile-action-soon {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* Messages */
+
+.notice {
+  max-width: 34rem;
+  padding: clamp(1.5rem, 6vw, 3.5rem) 0;
+}
+
+.notice-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.notice-text {
+  margin: 0.75rem 0 1.25rem;
+  color: var(--ink-soft);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: var(--saffron);
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+}
+
+.alert {
+  max-width: 40rem;
+  overflow-wrap: anywhere;
+  margin-bottom: 1.75rem;
+  padding: 0.875rem 1.125rem;
+  border-radius: 12px;
+  background: var(--sand);
+  color: var(--sand-ink);
+}
+
+.alert p + p {
+  margin-top: 0.375rem;
+}
+
+.alert-error {
+  background: var(--error-bg);
+  color: var(--error-ink);
+}
+
+/* Coordinator check page */
+
+.check {
+  max-width: 48rem;
+  padding-bottom: 4rem;
+}
+
+.check-title {
+  padding-top: clamp(1rem, 5vw, 2.5rem);
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(2rem, 1.5rem + 2.2vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.check-intro {
+  margin: 0.5rem 0 1.75rem;
+  color: var(--ink-soft);
+}
+
+.status {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+.status-list {
+  display: grid;
+  gap: 1rem 2rem;
+}
+
+@media (min-width: 36rem) {
+  .status-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.status-list dt {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.status-list dd {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.just-now {
+  display: block;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.status-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.status-note {
+  margin-top: 0.75rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button-primary {
+  border-color: var(--saffron);
+  background: var(--saffron);
+  color: var(--surface);
+}
+
+.problems {
+  margin-top: 2.5rem;
+}
+
+.problems-title {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.25;
+}
+
+.problems-note {
+  margin-top: 0.375rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.problem-list {
+  margin-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.problem {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.problem-where {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+
+.tag {
+  padding: 0 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.problem-error .tag {
+  background: var(--error-bg);
+  color: var(--error-ink);
+}
+
+.problem-warning .tag {
+  background: var(--warning-bg);
+  color: var(--warning-ink);
+}
+
+.problem-program {
+  margin-top: 0.375rem;
+  font-weight: 600;
+}
+
+.problem-message {
+  margin-top: 0.125rem;
+}
+
+/* Feedback on touch and hover, only for people who have not asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .place-link,
+  .place-link .icon,
+  .tile,
+  .change-link {
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
+}

@@ -3,5 +3,5 @@ build
 .wrangler
 worker-configuration.d.ts
 package-lock.json
-fixtures/*.csv
+test/fixtures/*.csv
 sheet-template

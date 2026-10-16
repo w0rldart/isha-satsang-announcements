@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": [".react-router/types/**/*", "app/**/*", "workers/**/*", "worker-configuration.d.ts", "fixtures/**/*"],
+  "include": [".react-router/types/**/*", "app/**/*", "workers/**/*", "worker-configuration.d.ts"],
   "compilerOptions": {
     "composite": true,
     "lib": ["ES2023"],

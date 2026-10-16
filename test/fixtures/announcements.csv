@@ -1,0 +1,17 @@
+Visible,Priority,Program Name,Banner Image URL,Start Date,End Date,Show Until,Delivery Mode,Venue,City,Country,Languages,Satsang Locations,Registration URL
+Yes,1,Samyama with Sadhguru,,2026-12-29,2027-01-05,2026-12-20,In-Person,Isha Yoga Center,Coimbatore,India,English,All,https://example.org/register/samyama
+Yes,2,Inner Engineering Online,,,,,Online,,,,"English, Tamil, Hindi, Telugu, Kannada, Malayalam, Marathi, Bengali, Gujarati, French, German, Spanish",All,https://example.org/register/inner-engineering-online
+Yes,,Inner Engineering Completion,,2026-11-14,2026-11-15,,In-Person,Conway Hall,London,United Kingdom,English,"London, Manchester",https://example.org/register/ie-completion-london
+Yes,,Hatha Yoga: Upa Yoga Workshop,,2026-11-07,,,In-Person,Yogahaus Kreuzberg,Berlin,Germany,"Deutsch, English","Berlin, Munich",https://example.org/register/upa-yoga-berlin
+Yes,,Bhava Spandana Program: residential program with an arrival-day orientation and a closing integration session,,2027-03-04,2027-03-07,2027-02-25,In-Person,Isha Institute of Inner-sciences (residential campus and conference centre),McMinnville,United States,English,"london , MANCHESTER, Berlin, Londn",https://example.org/register/bhava-spandana
+Yes,,Ημέρα Γιόγκα στην Αθήνα,,2026-11-28,,,In-Person,Πολιτιστικό Κέντρο Μελίνα,Αθήνα,Ελλάδα,"Ελληνικά, English",Athens,https://example.org/register/athens
+Yes,,ஈஷா தமிழ் சத்சங்கம்,,2026-11-22,,,Online,,,,"தமிழ், English","London, Manchester",https://example.org/register/tamil-satsang
+Yes,,Шамбхави Махамудра Крийя,,2026-12-05,2026-12-06,,In-Person,Gemeindezentrum Schwabing,Munich,Germany,"Русский, Deutsch, English",Munich,https://example.org/register/shambhavi-munich
+Yes,,Yantra Ceremony,,21/11/2026,,,In-Person,Salle des Fêtes,Paris,France,"Français, English",Paris,
+Yes,,Guided Meditation Evening,,2026-12-05,,,In-Person,Volkshaus,Zürich,Switzerland,"Deutsch, English",zurich,isha sadhguru org/zurich
+Yes,,Isha Kriya Online Session,https://example.org/images/isha-kriya-banner.jpg,2026-11-01,2026-11-30,,Online,,,,"English, Português",All,https://example.org/register/isha-kriya
+No,,Spring Retreat (draft),,2027-04-10,2027-04-12,,In-Person,,London,United Kingdom,English,London,https://example.org/register/spring
+Yes,,Mahashivratri Screening,,2026-09-20,,,Online,,,,English,All,https://example.org/register/msr
+Yes,,Guru Purnima Celebration,,2027-07-11,,,In-Person,Conway Hall,London,United Kingdom,English,London,https://example.org/register/guru-purnima
+Yes,,हिन्दी सत्संग 🙏,,2026-11-29,,,Online,,,,"हिन्दी, English",London,https://example.org/register/hindi-satsang
+Yes,,Wrong Dates Example,,2026-12-10,2026-12-01,,In-Person,,Paris,France,English,Paris,https://example.org/register/wrong

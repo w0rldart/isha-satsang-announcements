@@ -25,7 +25,7 @@ cp .dev.vars.example .dev.vars
 npm run dev
 ```
 
-Open http://localhost:5173. Without sheet links in `.dev.vars`, the app reads the sample sheet in `fixtures/`. The check page is at http://localhost:5173/check?key=local-check-key.
+Open http://localhost:5173. `.dev.vars` needs the two published CSV links and `CHECK_KEY`. `npm run dev` reads the real sheet. The check page is at http://localhost:5173/check?key=local-check-key.
 
 ```bash
 npm test
@@ -77,7 +77,7 @@ app/
   lib/view.ts            what is on screen today, and in what order
   styles/app.css         all styling
 workers/app.ts           Worker entry: web requests and the scheduled refresh
-fixtures/                sample sheet for local development and tests
+test/fixtures/           sample sheet for tests
 sheet-template/          the master sheet template
 ```
 

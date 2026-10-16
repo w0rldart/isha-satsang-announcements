@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice">
+  <style>
+    .bg { fill: #ece5da; } .mark { fill: #c7b59c; } .line { stroke: #c7b59c; }
+    @media (prefers-color-scheme: dark) { .bg { fill: #2c2620; } .mark { fill: #5a4d40; } .line { stroke: #5a4d40; } }
+  </style>
+  <rect class="bg" width="1200" height="900"/>
+  <g transform="translate(456 306) scale(9)">
+    <path class="mark" d="M16 5c-3.2 3.6-3.6 9.6 0 15 3.6-5.4 3.2-11.4 0-15Zm0 15c-5-1-9.2-4.6-10.6-9.8 4.6.6 8.9 4 10.6 9.8Zm0 0c5-1 9.2-4.6 10.6-9.8-4.6.6-8.9 4-10.6 9.8Z"/>
+    <path class="line" fill="none" stroke-width="1.6" stroke-linecap="round" d="M7 24.5h18"/>
+  </g>
+</svg>
