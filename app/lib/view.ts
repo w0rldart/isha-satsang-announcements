@@ -1,5 +1,8 @@
+import { longDate } from "./dates";
 import { slugify } from "./text";
-import type { Announcement, SatsangLocation, Snapshot } from "./types";
+import type { Announcement, DeliveryMode, SatsangLocation, Snapshot } from "./types";
+
+export const MODE_LABEL: Record<DeliveryMode, string> = { "in-person": "In Person", online: "Online" };
 
 export function isOnScreen(a: Announcement, today: string): boolean {
   return a.visible && (!a.lastDay || today <= a.lastDay);
@@ -56,4 +59,70 @@ export function locationsByCountry(snapshot: Snapshot, today: string): CountryGr
 export function findLocation(snapshot: Snapshot, name: string): SatsangLocation | undefined {
   const slug = slugify(name);
   return snapshot.locations.find((l) => l.slug === slug);
+}
+
+export interface Listing {
+  program: Announcement;
+  /** Names of the locations that show the program, in alphabetical order, or "all". */
+  where: string[] | "all";
+}
+
+export interface Browse {
+  /** Programs on screen today at any location, before the search narrows them. */
+  total: number;
+  groups: CountryGroup[];
+  programs: Listing[];
+}
+
+/**
+ * The home page: every location and every program on screen today, each program once. A search keeps the
+ * locations and programs that contain every word of it, matching the start of words in any casing or accent.
+ */
+export function browse(snapshot: Snapshot, today: string, query = ""): Browse {
+  const live = snapshot.announcements
+    .filter((a) => isOnScreen(a, today) && (a.locations === "all" || a.locations.length > 0))
+    .sort(byPriority);
+  const groups = locationsByCountry(snapshot, today);
+  const listings = live.map((program) => ({ program, where: whereShown(snapshot, program) }));
+
+  const terms = words(query).slice(0, 10);
+  if (terms.length === 0) return { total: live.length, groups, programs: listings };
+
+  return {
+    total: live.length,
+    groups: groups
+      .map((g) => ({ ...g, locations: g.locations.filter((l) => matches([l.name, l.country], terms)) }))
+      .filter((g) => g.locations.length > 0),
+    programs: listings.filter(({ program }) => matches(searchText(snapshot, program), terms)),
+  };
+}
+
+function whereShown(snapshot: Snapshot, a: Announcement): string[] | "all" {
+  if (a.locations === "all") return "all";
+  return snapshot.locations
+    .filter((l) => shownAt(a, l.slug))
+    .map((l) => l.name)
+    .sort(collator.compare);
+}
+
+/** What a search looks in: name, place, languages, mode, the locations that show the program, and its dates. */
+function searchText(snapshot: Snapshot, a: Announcement): string[] {
+  return [
+    a.title,
+    a.place,
+    ...a.languages,
+    a.mode ? MODE_LABEL[a.mode] : "",
+    ...snapshot.locations.filter((l) => shownAt(a, l.slug)).flatMap((l) => [l.name, l.country]),
+    a.start ? longDate(a.start) : "",
+    a.end ? longDate(a.end) : "",
+  ];
+}
+
+function words(text: string): string[] {
+  return slugify(text).split("-").filter(Boolean);
+}
+
+function matches(texts: string[], terms: string[]): boolean {
+  const haystack = texts.flatMap(words);
+  return terms.every((term) => haystack.some((word) => word.startsWith(term)));
 }

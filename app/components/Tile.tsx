@@ -1,14 +1,28 @@
 import { formatDates } from "../lib/dates";
 import type { Announcement } from "../lib/types";
+import { MODE_LABEL } from "../lib/view";
 import { CalendarIcon, ChevronIcon, LanguageIcon, PinIcon } from "./icons";
 
-const MODE_LABEL = { "in-person": "In Person", online: "Online" } as const;
+const list = new Intl.ListFormat("en-GB", { type: "conjunction" });
 
 /**
  * One program. The title is the link, and its ::after covers the whole tile, so the tile is one tap target
  * while screen readers hear the program name. Without a valid registration link nothing is clickable.
+ * `where` lists the satsang locations that show it, for pages that mix locations.
  */
-export function Tile({ program, version, first }: { program: Announcement; version: string; first: boolean }) {
+export function Tile({
+  program,
+  version,
+  first = false,
+  heading: Heading = "h2",
+  where,
+}: {
+  program: Announcement;
+  version: string;
+  first?: boolean;
+  heading?: "h2" | "h3";
+  where?: string[] | "all";
+}) {
   const image = program.imageUrl ? `/banner/${version}/${program.row}` : "/placeholder.svg";
 
   return (
@@ -25,7 +39,7 @@ export function Tile({ program, version, first }: { program: Announcement; versi
       />
 
       <div className="tile-body">
-        <h2 className="tile-title">
+        <Heading className="tile-title">
           {program.registrationUrl ? (
             <a className="tile-link" href={program.registrationUrl}>
               {program.title}
@@ -33,7 +47,7 @@ export function Tile({ program, version, first }: { program: Announcement; versi
           ) : (
             program.title
           )}
-        </h2>
+        </Heading>
         {/* After the title for screen readers, drawn over the corner of the image. */}
         {program.mode && <p className={`badge badge-${program.mode}`}>{MODE_LABEL[program.mode]}</p>}
 
@@ -63,6 +77,8 @@ export function Tile({ program, version, first }: { program: Announcement; versi
             </li>
           )}
         </ul>
+
+        {where && <p className="tile-where">Announced at {where === "all" ? "every satsang" : list.format(where)}</p>}
 
         {program.registrationUrl ? (
           <p className="tile-action" aria-hidden="true">

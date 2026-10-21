@@ -1,11 +1,11 @@
 import { data, redirect } from "react-router";
-import { LocationPicker } from "../components/LocationPicker";
+import { Browse } from "../components/Browse";
 import { Notice, Page } from "../components/Page";
 import { Tile } from "../components/Tile";
 import { cloudflareContext } from "../context";
 import { today } from "../lib/dates";
 import { getSnapshot } from "../lib/snapshot";
-import { findLocation, locationsByCountry, programsAt } from "../lib/view";
+import { browse, findLocation, programsAt } from "../lib/view";
 import { pageMeta } from "../meta";
 import type { Route } from "./+types/location";
 
@@ -18,8 +18,8 @@ export async function loader({ request, params, context }: Route.LoaderArgs) {
   const location = findLocation(snapshot, params.location);
 
   if (!location) {
-    const groups = locationsByCountry(snapshot, today());
-    return data({ origin, view: "unknown" as const, groups }, { status: 404, headers });
+    const home = browse(snapshot, today());
+    return data({ origin, view: "unknown" as const, version: snapshot.fingerprint, ...home }, { status: 404, headers });
   }
   // One address per location: /London, /london/ and /Z%C3%BCrich go to /london and /zurich.
   if (params.location !== location.slug || url.pathname.endsWith("/")) {
@@ -48,7 +48,7 @@ export default function Location({ loaderData }: Route.ComponentProps) {
   if (loaderData.view === "unknown") {
     return (
       <Page>
-        <LocationPicker groups={loaderData.groups} notFound />
+        <Browse {...loaderData} notFound />
       </Page>
     );
   }

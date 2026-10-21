@@ -26,9 +26,20 @@ export function today(now = new Date()): string {
 }
 
 const format = new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const longFormat = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
 
 /** "7 Nov 2026" for one day; "4–7 Mar 2027" or "29 Dec 2026 – 5 Jan 2027" for a range. */
 export function formatDates(start: string, end: string | null): string {
   const from = new Date(`${start}T00:00:00Z`);
   return end && end !== start ? format.formatRange(from, new Date(`${end}T00:00:00Z`)) : format.format(from);
+}
+
+/** "7 November 2026", so a search for "nov" or "november" finds the date. */
+export function longDate(date: string): string {
+  return longFormat.format(new Date(`${date}T00:00:00Z`));
 }
