@@ -1,6 +1,6 @@
 # Satsang Announcements
 
-Attendees scan a QR code at satsang, choose their location and see the programs announced there. Each program links to its registration page. Coordinators manage everything in one Google Sheet.
+Attendees scan a QR code at satsang and see the programs announced there. They can open their location's page, or browse and search every program by name, city or language. Each program links to its registration page. Coordinators manage everything in one Google Sheet.
 
 React Router v8 on Cloudflare Workers, on the free plan. Pages are server-rendered HTML with no JavaScript, no cookies and no tracking.
 
@@ -67,14 +67,14 @@ The CSV links are secrets because anyone with them can read the published tabs, 
 
 ```
 app/
-  routes/home.tsx        location list
+  routes/home.tsx        every location and program, and search (/?q=)
   routes/location.tsx    one location's programs (/london)
   routes/check.tsx       coordinator check page
   routes/banner.ts       serves banner images from this site, with a placeholder on failure
-  components/            page frame, location list, program tile, icons
+  components/            page frame, home page, location list, program tile, icons
   lib/sheet.ts           column rules and validation
   lib/snapshot.ts        refresh and storage in KV
-  lib/view.ts            what is on screen today, and in what order
+  lib/view.ts            what is on screen today, in what order, and search
   styles/app.css         all styling
 workers/app.ts           Worker entry: web requests and the scheduled refresh
 test/fixtures/           sample sheet for tests

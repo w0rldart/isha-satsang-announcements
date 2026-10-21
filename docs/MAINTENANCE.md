@@ -55,9 +55,10 @@ Names match ignoring case, extra spaces, punctuation and accents, so `london ` a
 2. A valid row is on screen when Visible is Yes and today is not after its last day. The last day is the earlier of Show Until and the program's last day (End Date, or Start Date for a one-day program). A row with no dates stays until Visible is No.
 3. Today is the date in the UK, so a tile never disappears early anywhere in Europe.
 4. A location shows a tile when Satsang Locations says All or names that location.
-5. The location list shows every location with at least one tile on screen, grouped by country.
+5. The home page lists every location with at least one tile on screen, grouped by country. Below it, every program on screen appears once, with the locations that show it.
 6. Tiles are ordered by Priority, then Start Date, then Program Name. Blanks go last.
-7. Each location has its own address, built from its name: `/london`, `/zurich`. Renaming a location changes its address.
+7. Search on the home page looks in Program Name, Venue, City, Country, Languages, Delivery Mode, the satsang locations that show the program and their countries, and the month of Start Date and End Date. Every word typed must match the start of a word there. Case and accents are ignored, so `zurich` finds Zürich and `dec` finds December.
+8. Each location has its own address, built from its name: `/london`, `/zurich`. Renaming a location changes its address.
 
 ## Refresh
 
